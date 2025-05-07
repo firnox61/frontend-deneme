@@ -1,25 +1,39 @@
-name: CI
+name: React Next.js CI
 
+# GitHub Actions'ı hangi durumlarda çalıştırmak istediğimizi belirliyoruz
 on:
   push:
     branches:
-      - main
+      - main  # 'main' branch'ine push yapıldığında çalışacak
+  pull_request:
+    branches:
+      - main  # Pull request oluşturulduğunda çalışacak
 
 jobs:
   build:
+    # Ubuntu üzerinde çalıştıracağız, dilersen başka bir işletim sistemi de kullanabilirsin
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Repository'yi çek
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # 2. Node.js ortamını kur
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18'  # Node.js 18+ sürümünü kullanıyoruz
 
+      # 3. Bağımlılıkları yükle
       - name: Install dependencies
-        run: npm install
+        run: npm install  # Eğer yarn kullanıyorsanız: run: yarn install
 
+      # 4. Uygulamayı build et
+      - name: Build application
+        run: npm run build  # Eğer yarn kullanıyorsanız: run: yarn build
+
+      # 5. (Opsiyonel) Testleri çalıştır (Eğer testler varsa)
       - name: Run tests
-        run: npm test
+        run: npm test  # Eğer yarn kullanıyorsanız: run: yarn test
+
