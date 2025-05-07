@@ -34,6 +34,4 @@ jobs:
         run: npm run build  # Eğer yarn kullanıyorsanız: run: yarn build
 
       # 5. (Opsiyonel) Testleri çalıştır (Eğer testler varsa)
-      - name: Run tests
-        run: npm test  # Eğer yarn kullanıyorsanız: run: yarn test
-
+     
